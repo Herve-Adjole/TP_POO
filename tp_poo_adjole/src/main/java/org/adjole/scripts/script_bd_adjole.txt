@@ -1,0 +1,41 @@
+CREATE DATABASE bd_tppoo_hadjole;
+USE bd_tppoo_hadjole;
+
+CREATE TABLE Client (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(31),
+    prenom VARCHAR(63),
+    telephone VARCHAR(31)
+);
+CREATE TABLE ClientParticulier (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(31),
+    prenom VARCHAR(63),
+    telephone VARCHAR(31),
+    dateNaiss Date,
+    lieuNaiss VARCHAR(31)
+);
+
+CREATE TABLE Produit (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    libelle VARCHAR(123),
+    actif VARCHAR(1)
+);
+
+CREATE TABLE Souscription (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    dateHeureSous DATETIME,
+    actif VARCHAR(1),
+    idClient INT,
+    idProduit INT,
+    FOREIGN KEY (idClient) REFERENCES Client(id),
+    FOREIGN KEY (idProduit) REFERENCES Produit(id)
+);
+
+CREATE TABLE Sms (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    idClient INT,
+    libelle VARCHAR(255),
+    envoye BOOLEAN,
+    FOREIGN KEY (idClient) REFERENCES Client(id)
+);
